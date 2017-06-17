@@ -25,7 +25,7 @@ module Intrigue
       many_to_many :task_results
       many_to_one  :project
 
-      include Intrigue::Model::Capabilities::CalculateProvider
+      include Intrigue::Model::Capabilities::Provider
 
       def validate
         super
@@ -103,6 +103,12 @@ module Intrigue
       def deleted?
         return true if deleted
       false
+      end
+
+      def parents
+        task_results = []
+        Intrigue::Model::TaskResult.each{|t| t.entities.include? self }
+      task_results.map{|t| t.base_entity}
       end
 
       def children

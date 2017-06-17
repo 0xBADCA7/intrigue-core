@@ -1,7 +1,7 @@
 module Intrigue
   module Model
     module Capabilities
-    module CalculateProvider
+    module Provider
 
       def provider
         providers = []
@@ -48,7 +48,9 @@ module Intrigue
 
         end
 
-      providers.sort.uniq.join(" | ")
+      # Return the providers list unless its empty
+
+      providers.sort.uniq
       end
 
     end

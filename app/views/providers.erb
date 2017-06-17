@@ -1,0 +1,20 @@
+<%=
+h = {};
+@entities.where(:type => "Intrigue::Entity::DnsRecord").sort_by{|x|x.name}.each{ |e|
+
+   if e.provider.empty?
+     key = "Unknown"
+   else
+     key = e.provider.first
+   end
+
+   h[key] = Array.new unless h[key]
+   h[key] << e
+};
+
+out = ""
+h.each{|k,v|
+  out << "<b>#{k.to_s}:</b><br><ul> #{v.select{|e| !e.hidden }.map{|e| "<li><a href=/v1/#{@project_name}/entities/#{e.id}>#{e}</a></li>"}.join("")}</ul><br>"
+}
+out
+%>

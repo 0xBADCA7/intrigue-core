@@ -53,8 +53,13 @@ class IntrigueApp < Sinatra::Base
           @entity_pairs << {:task_result => task_result, :entity => entity}
         end
       end
-
       erb :'gexf', :layout => false
+    end
+
+    get '/:project/providers' do
+      @entities = Intrigue::Model::Entity.scope_by_project(@project_name)
+
+      erb :'providers'
     end
 
   end

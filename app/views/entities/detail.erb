@@ -12,7 +12,7 @@ Details:
 
 Hidden:  <%= "true" if @entity.hidden %><br/><br/>
 
-Providers:  <%= @entity.provider %><br/><br/>
+Providers:  <%= @entity.provider.join(" | ") %><br/><br/>
 
 Export this entity: <br/>
 <ul>
